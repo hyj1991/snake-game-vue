@@ -30,13 +30,13 @@
       <button @click="backToMenu">返回菜单</button>
     </div>
     
-    <div class="game-controls">
+    <div class="game-controls" v-if="!isMobileDevice || gameStatus === 'over'">
       <button @click="togglePause">{{ gameStatus === 'paused' ? '继续' : '暂停' }}</button>
       <button @click="backToMenu">返回菜单</button>
     </div>
     
     <!-- 移动端虚拟方向键 -->
-    <div class="virtual-controls" v-if="isMobileDevice">
+    <div class="virtual-controls" v-if="isMobileDevice && gameStatus !== 'over'">
       <div class="direction-buttons">
         <button class="direction-btn up-btn" @touchstart.prevent="handleDirectionTouch('up')">
           <span class="arrow">↑</span>
@@ -367,7 +367,7 @@ onUnmounted(() => {
 
 .horizontal-buttons {
   display: flex;
-  gap: 50px;
+  gap: 100px;
   margin: 10px 0;
 }
 
