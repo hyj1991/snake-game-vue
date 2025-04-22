@@ -1,5 +1,7 @@
 # 贪食蛇大作战
 
+[![GitHub仓库](https://img.shields.io/badge/GitHub-snake--game--vue-brightgreen)](https://github.com/hyj1991/snake-game-vue)
+
 一个基于Vue的双人贪食蛇游戏，支持玩家与AI对战。游戏采用卡通动画风格，界面美观，操作简单。
 
 ## 游戏特点
