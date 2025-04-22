@@ -349,8 +349,8 @@ onUnmounted(() => {
 
 /* 移动端虚拟方向键样式 */
 .virtual-controls {
-  position: fixed;
-  bottom: 20px;
+  position: absolute;
+  bottom: 10px;
   left: 50%;
   transform: translateX(-50%);
   z-index: 100;
