@@ -34,11 +34,31 @@
       <button @click="togglePause">{{ gameStatus === 'paused' ? '继续' : '暂停' }}</button>
       <button @click="backToMenu">返回菜单</button>
     </div>
+    
+    <!-- 移动端虚拟方向键 -->
+    <div class="virtual-controls" v-if="isMobileDevice">
+      <div class="direction-buttons">
+        <button class="direction-btn up-btn" @touchstart.prevent="handleDirectionTouch('up')">
+          <span class="arrow">↑</span>
+        </button>
+        <div class="horizontal-buttons">
+          <button class="direction-btn left-btn" @touchstart.prevent="handleDirectionTouch('left')">
+            <span class="arrow">←</span>
+          </button>
+          <button class="direction-btn right-btn" @touchstart.prevent="handleDirectionTouch('right')">
+            <span class="arrow">→</span>
+          </button>
+        </div>
+        <button class="direction-btn down-btn" @touchstart.prevent="handleDirectionTouch('down')">
+          <span class="arrow">↓</span>
+        </button>
+      </div>
+    </div>
   </div>
 </template>
 
 <script setup>
-import { ref, onMounted, onUnmounted, watch } from 'vue';
+import { ref, onMounted, onUnmounted, watch, computed } from 'vue';
 import { useSnakeGame } from '../composables/useSnakeGame';
 
 const props = defineProps({
@@ -56,6 +76,17 @@ const aiScore = ref(0);
 const gameStatus = ref('running');
 const gameResult = ref(null); // 'player', 'ai', 或 'draw'
 const gameResultDescription = ref('');
+
+// 检测是否为移动设备
+const isMobileDevice = computed(() => {
+  return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || window.innerWidth <= 768;
+});
+
+// 处理虚拟方向键的触摸事件
+const handleDirectionTouch = (direction) => {
+  if (gameStatus.value !== 'running') return;
+  updatePlayerDirection(direction);
+};
 
 // 游戏逻辑初始化
 const {
@@ -314,5 +345,72 @@ onUnmounted(() => {
 .game-controls button:hover {
   background-color: #3d8b50;
   transform: translateY(-2px);
+}
+
+/* 移动端虚拟方向键样式 */
+.virtual-controls {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 100;
+  width: 100%;
+  max-width: 300px;
+}
+
+.direction-buttons {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.horizontal-buttons {
+  display: flex;
+  gap: 50px;
+  margin: 10px 0;
+}
+
+.direction-btn {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background-color: rgba(74, 156, 93, 0.8);
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  -webkit-tap-highlight-color: transparent;
+}
+
+.direction-btn:active {
+  background-color: rgba(61, 139, 80, 0.9);
+  transform: scale(0.95);
+}
+
+.arrow {
+  font-size: 24px;
+  color: white;
+  font-weight: bold;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  .game-canvas {
+    max-width: 100%;
+    max-height: 60vh;
+  }
+  
+  .game-info {
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .game-controls {
+    flex-direction: column;
+    gap: 10px;
+  }
 }
 </style>
