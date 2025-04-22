@@ -1,11 +1,12 @@
 {
-  "name": "snake3",
+  "name": "snake-game-vue",
   "private": true,
   "version": "0.0.0",
   "type": "module",
+  "homepage": "https://hyj1991.github.io/snake-game-vue/",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "vite build --base=/snake-game-vue/",
     "preview": "vite preview"
   },
   "dependencies": {
