@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <!-- 蛇头 -->
+  <circle cx="70" cy="50" r="15" fill="#4a9c5d" />
+  
+  <!-- 蛇身 -->
+  <circle cx="45" cy="50" r="12" fill="#4a9c5d" opacity="0.9" />
+  <circle cx="25" cy="50" r="10" fill="#4a9c5d" opacity="0.8" />
+  <circle cx="10" cy="50" r="8" fill="#4a9c5d" opacity="0.7" />
+  
+  <!-- 蛇眼睛 -->
+  <circle cx="75" cy="45" r="3" fill="white" />
+  <circle cx="75" cy="55" r="3" fill="white" />
+  
+  <!-- 蛇瞳孔 -->
+  <circle cx="77" cy="45" r="1.5" fill="black" />
+  <circle cx="77" cy="55" r="1.5" fill="black" />
+  
+  <!-- 食物 -->
+  <circle cx="90" cy="50" r="5" fill="#e74c3c" />
+  <circle cx="88" cy="48" r="1.5" fill="white" opacity="0.7" />
+</svg>
